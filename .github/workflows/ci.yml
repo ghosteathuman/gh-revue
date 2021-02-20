@@ -28,11 +28,8 @@ jobs:
         npm install -g yarn
     - name: Install Ruby Dependencies
       run: |
-        gem install bundler -v 2.2.8
+        gem install bundler
         bundle install
-    - name: Asset Setup
-      run: |
-        rails assets:precompile
     - name: Rails Test
       run: |
         rails test
