@@ -30,9 +30,6 @@ jobs:
       run: |
         gem install bundler
         bundle install
-    - name: Asset Setup
-      run: |
-        rails assets:precompile
     - name: Rails Test
       run: |
         rails test
