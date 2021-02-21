@@ -34,6 +34,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # Ruby fast debugger - base + CLI (https://github.com/deivid-rodriguez/byebug)
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Security vulnerability scanner for Ruby on Rails. (https://brakemanscanner.org)
+  gem 'brakeman', '~> 5.0'
 end
 
 group :development do

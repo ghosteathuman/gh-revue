@@ -33,3 +33,6 @@ jobs:
     - name: Rails Test
       run: |
         rails test
+    - name: Brakeman
+      run: |
+        brakeman
