@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    name: CI
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.0.0
+    env:
+      RAILS_ENV: test
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Install Nodejs LTS
+      run: |
+        apt-get -y update && apt-get -y upgrade && apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
+    - name: Install Yarn
+      run: |
+        npm install -g yarn
+    - name: Install Ruby Dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Rails Test
+      run: |
+        rails test
+    - name: Brakeman
+      run: |
+        brakeman
+    - name: Standard
+      run: |
+        bundle exec standardrb
