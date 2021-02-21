@@ -36,3 +36,6 @@ jobs:
     - name: Brakeman
       run: |
         brakeman
+    - name: Standard
+      run: |
+        bundle exec standardrb
