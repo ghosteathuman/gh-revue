@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/ghosteathuman.github-revuw.git" }
+git_source(:github) { |repo| "https://github.com/ghosteathuman.github-revue.git" }
 
 ruby File.read(".ruby-version").strip
 
