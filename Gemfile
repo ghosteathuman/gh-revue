@@ -37,6 +37,8 @@ group :development, :test do
   gem "brakeman", "~> 5.0"
   # Ruby Style Guide, with linter &amp; automatic code fixer (https://github.com/testdouble/standard)
   gem "standard", github: "testdouble/standard", branch: "master"
+  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
+  gem "simplecov"
 end
 
 group :development do
