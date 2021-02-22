@@ -1,5 +1,9 @@
 # README
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/ab253887767b3930aa65/maintainability)](https://codeclimate.com/github/ghosteathuman/github-revue/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ab253887767b3930aa65/test_coverage)](https://codeclimate.com/github/ghosteathuman/github-revue/test_coverage)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

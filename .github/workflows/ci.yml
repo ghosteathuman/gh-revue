@@ -30,7 +30,7 @@ jobs:
       run: |
         gem install bundler
         bundle install
-    - name: CodeClimate before-build
+    - name: Code Climate Setup
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
@@ -38,7 +38,7 @@ jobs:
     - name: Rails Test
       run: |
         rails test
-    - name: CodeClimate Test Coverage
+    - name: Code Climate Test Coverage
       run: |
         export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
         ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}}
