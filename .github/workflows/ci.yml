@@ -16,7 +16,6 @@ jobs:
       image: ruby:3.0.0
     env:
       RAILS_ENV: test
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
     steps:
     - name: Checkout Repository
@@ -31,18 +30,9 @@ jobs:
       run: |
         gem install bundler
         bundle install
-    - name: Code Climate Setup
-      run: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-        ./cc-test-reporter before-build
     - name: Rails Test
       run: |
         rails test
-    - name: Code Climate Test Coverage
-      run: |
-        export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-        ./cc-test-reporter after-build
     - name: Brakeman
       run: |
         brakeman

@@ -1,4 +1,4 @@
-# README
+# Github Revue
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/ab253887767b3930aa65/maintainability)](https://codeclimate.com/github/ghosteathuman/github-revue/maintainability)
 
