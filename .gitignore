@@ -16,8 +16,8 @@
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
 /config/credentials.yml.enc
+/config/master.key
 
 /public/packs
 /public/packs-test
@@ -26,5 +26,6 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore developement related folders.
 /coverage/*
 .idea
