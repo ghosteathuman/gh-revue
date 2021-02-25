@@ -20,6 +20,8 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # Create JSON structures via a Builder-style DSL (https://github.com/rails/jbuilder)
 gem "jbuilder", "~> 2.7"
+# Higher-level data structures built on Redis. (https://github.com/rails/kredis)
+gem "kredis", "0.2.3"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -38,6 +40,7 @@ group :development, :test do
   # Ruby Style Guide, with linter &amp; automatic code fixer (https://github.com/testdouble/standard)
   gem "standard", github: "testdouble/standard", branch: "master"
   # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
+  # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
   gem "simplecov"
 end
 
