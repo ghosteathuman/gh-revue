@@ -26,13 +26,14 @@ class GithubController < ApplicationController
     response_body = JSON.parse(response.body)
     access_token = response_body["access_token"]
 
-    graphql_response =  Net::HTTP.post(GRAPHQL_URL, {
+    graphql_response = Net::HTTP.post(GRAPHQL_URL, {
       "query" => "query { viewer { login } }"
-      # query: 'query { repository(owner: "k0kubun", name: "hamlit") { nameWithOwner } }'
     }.to_json,
       "Content-Type" => "application/json", "Authorization" => "bearer #{access_token}")
 
     user_login = JSON.parse(graphql_response.body)["data"]["viewer"]["login"]
 
+    viewer = Kredis.json user_login.to_s
+    viewer.value = {"user" => user_login, "access_token" => access_token}
   end
 end
