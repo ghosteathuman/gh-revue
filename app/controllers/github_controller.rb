@@ -1,7 +1,7 @@
 class GithubController < ApplicationController
-  ENDPOINT = URI.parse("https://api.github.com")
+  GRAPHQL_URL = URI("https://api.github.com/graphql")
 
-  def get_user_identity
+  def user_identity
     client_id = Rails.application.credentials.github[:client_id]
 
     return_html = Net::HTTP.get(
@@ -15,7 +15,7 @@ class GithubController < ApplicationController
   end
 
   def callback
-    url = URI.parse("https://github.com/login/oauth/access_token")
+    url = URI("https://github.com/login/oauth/access_token")
     client_id = Rails.application.credentials.github[:client_id]
     client_secret = Rails.application.credentials.github[:client_secret]
 
@@ -25,5 +25,14 @@ class GithubController < ApplicationController
       "Content-Type" => "application/json", "Accept" => "application/json")
     response_body = JSON.parse(response.body)
     access_token = response_body["access_token"]
+
+    graphql_response =  Net::HTTP.post(GRAPHQL_URL, {
+      "query" => "query { viewer { login } }"
+      # query: 'query { repository(owner: "k0kubun", name: "hamlit") { nameWithOwner } }'
+    }.to_json,
+      "Content-Type" => "application/json", "Authorization" => "bearer #{access_token}")
+
+    user_login = JSON.parse(graphql_response.body)["data"]["viewer"]["login"]
+
   end
 end
