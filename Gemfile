@@ -42,6 +42,8 @@ group :development, :test do
   # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
   # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
   gem "simplecov"
+  # RSpec for Rails (https://github.com/rspec/rspec-rails)
+  gem 'rspec-rails', '~> 4.0.2'
 end
 
 group :development do
