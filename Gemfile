@@ -43,7 +43,7 @@ group :development, :test do
   # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
   gem "simplecov"
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
-  gem 'rspec-rails', '~> 4.0.2'
+  gem "rspec-rails", "~> 4.0.2"
 end
 
 group :development do
