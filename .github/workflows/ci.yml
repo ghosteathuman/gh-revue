@@ -16,6 +16,16 @@ jobs:
       image: ruby:3.0.0
     env:
       RAILS_ENV: test
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ""
+    services:
+      redis:
+        image: redis:6.2-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - name: Checkout Repository
@@ -30,9 +40,6 @@ jobs:
       run: |
         gem install bundler
         bundle install
-    - name: Rails Test
-      run: |
-        rails test
     - name: Rspec
       run: |
         bundle exec rspec spec
