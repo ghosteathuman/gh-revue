@@ -13,7 +13,6 @@ class Github
   end
 
   def store_access_token(code)
-    # TODO: Write test
     url = URI("https://github.com/login/oauth/access_token")
     client_id = Rails.application.credentials.github[:client_id]
     client_secret = Rails.application.credentials.github[:client_secret]
