@@ -33,6 +33,9 @@ jobs:
     - name: Rails Test
       run: |
         rails test
+    - name: Rspec
+      run: |
+        bundle exec rspec spec
     - name: Brakeman
       run: |
         brakeman
