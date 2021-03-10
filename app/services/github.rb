@@ -2,7 +2,6 @@ class Github
   GRAPHQL_URL = URI("https://api.github.com/graphql")
 
   def identity_request_url(request_base_url)
-    # TODO: Write test
     client_id = Rails.application.credentials.github[:client_id]
 
     return_html = Net::HTTP.get(
@@ -13,7 +12,8 @@ class Github
     Nokogiri::HTML.parse(return_html).at_css("a")[:href]
   end
 
-  def get_access_token(code)
+  def store_access_token(code)
+    # TODO: Write test
     url = URI("https://github.com/login/oauth/access_token")
     client_id = Rails.application.credentials.github[:client_id]
     client_secret = Rails.application.credentials.github[:client_secret]

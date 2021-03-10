@@ -39,11 +39,6 @@ group :development, :test do
   gem "brakeman", "~> 5.0"
   # Ruby Style Guide, with linter &amp; automatic code fixer (https://github.com/testdouble/standard)
   gem "standard", github: "testdouble/standard", branch: "master"
-  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
-  # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
-  gem "simplecov"
-  # RSpec for Rails (https://github.com/rspec/rspec-rails)
-  gem "rspec-rails", "~> 4.0.2"
 end
 
 group :development do
@@ -59,6 +54,15 @@ group :development do
 end
 
 group :test do
+  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites (http://github.com/colszowka/simplecov)
+  # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
+  gem "simplecov"
+  # RSpec for Rails (https://github.com/rspec/rspec-rails)
+  gem "rspec-rails", "~> 4.0.2"
+  # Library for stubbing HTTP requests in Ruby. (http://github.com/bblimke/webmock)
+  gem "webmock"
+  # Easily generate fake data (https://github.com/faker-ruby/faker)
+  gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "master"
   # Adds support for Capybara system testing and selenium driver
   # Capybara aims to simplify the process of integration testing Rack applications, such as Rails, Sinatra or Merb (https://github.com/teamcapybara/capybara)
   gem "capybara", ">= 3.26"

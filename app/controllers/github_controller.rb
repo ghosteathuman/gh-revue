@@ -4,6 +4,6 @@ class GithubController < ApplicationController
   end
 
   def callback
-    Github.new.get_access_token(params[:code])
+    Github.new.store_access_token(params[:code])
   end
 end
