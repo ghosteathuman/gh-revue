@@ -1,0 +1,9 @@
+steps:
+  - label: "Ubuntu Update"
+    command: apt-get update
+  - label: "Ruby Installation"
+    command: apt-get install -y ruby-full
+  - label: "Ruby Version"
+    command: ruby --version
+  - label: "Install Bundle"
+    command: gem install bundler
