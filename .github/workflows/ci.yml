@@ -15,6 +15,7 @@ jobs:
     container:
       image: ruby:3.0.0
     env:
+      CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
       RAILS_ENV: test
       REDIS_HOST: redis
       REDIS_PASSWORD: ""
@@ -49,3 +50,5 @@ jobs:
     - name: Standard
       run: |
         bundle exec standardrb
+    - name: Code Climate Code Coverage
+      uses: paambaati/codeclimate-action@v2.7.5
