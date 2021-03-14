@@ -1,7 +1,6 @@
 # GH Revue
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/c3f01036cb563d5d5b37/maintainability)](https://codeclimate.com/github/ghosteathuman/gh-revue/maintainability)
-
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c3f01036cb563d5d5b37/test_coverage)](https://codeclimate.com/github/ghosteathuman/gh-revue/test_coverage)
 
 This README would normally document whatever steps are necessary to get the
@@ -19,7 +18,13 @@ Things you may want to cover:
 
 * Database initialization
 
-* How to run the test suite
+### Running the test suite
+
+Ensure that Redis is up and running. Refer to Docker Compose section on how to run Redis.
+
+```bash
+$ bundle exec rspec
+```
 
 * Services (job queues, cache servers, search engines, etc.)
 
