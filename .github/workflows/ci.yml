@@ -12,8 +12,6 @@ jobs:
   test:
     name: CI
     runs-on: ubuntu-latest
-    container:
-      image: ruby:3.0.0
     env:
       CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
       RAILS_ENV: test
@@ -31,16 +29,10 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Install Nodejs LTS
-      run: |
-        apt-get -y update && apt-get -y upgrade && apt-get install -y curl && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
-    - name: Install Yarn
-      run: |
-        npm install -g yarn
     - name: Install Ruby Dependencies
-      run: |
-        gem install bundler
-        bundle install
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
     - name: Rspec
       run: |
         bundle exec rspec spec
