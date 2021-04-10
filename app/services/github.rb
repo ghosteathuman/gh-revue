@@ -33,5 +33,25 @@ class Github
 
     viewer = Kredis.json user_login.to_s
     viewer.value = {"user" => user_login, "access_token" => access_token}
+    user_login
+  end
+
+  def get_pull_requests(username)
+    user = Kredis.json username
+    access_token = user.value["access_token"]
+
+    graphql_response = Net::HTTP.post(GRAPHQL_URL, {
+      "query" => "query { viewer { pullRequests(last: 20, states:[MERGED, OPEN]) { edges { node {
+                number
+                state
+                title
+                url
+                reviewDecision
+                reviewRequests(last: 20) { nodes { requestedReviewer { ... on User { login } } } }
+              } } } } }"
+    }.to_json,
+      "Content-Type" => "application/json", "Authorization" => "bearer #{access_token}")
+
+    JSON.parse(graphql_response.body)["data"]["viewer"]["pullRequests"]["edges"].map { |pr| pr.values }.flatten
   end
 end

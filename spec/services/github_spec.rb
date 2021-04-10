@@ -78,4 +78,30 @@ RSpec.describe Github do
         "https://api.github.com/graphql").once
     end
   end
+
+  describe "get_pull_requests" do
+    let(:access_token) { Faker::Alphanumeric.alphanumeric(number: 40) }
+    let(:login) { Faker::Internet.username }
+
+    it "gets pull requests" do
+      stub_request(:post, "https://api.github.com/graphql")
+        .with(
+          body: "{\"query\":\"query { viewer { pullRequests(last: 20, states:[MERGED, OPEN]) { edges { node {\\n                number\\n                state\\n                title\\n                url\\n                reviewDecision\\n                reviewRequests(last: 20) { nodes { requestedReviewer { ... on User { login } } } }\\n              } } } } }\"}",
+          headers: {
+            "Authorization" => "bearer #{access_token}",
+            "Content-Type" => "application/json"
+          }
+        )
+        .to_return(status: 200, body: "{\"data\":{\"viewer\":{\"pullRequests\":{\"edges\":[{\"node\":{\"number\":\"3\",\"title\":\"Example\",\"url\":\"https://github.com/example\"}}]}}}}", headers: {})
+
+      user = Kredis.json login.to_s
+      user.value = {"user" => login, "access_token" => access_token}
+
+      pull_requests = Github.new.get_pull_requests(login)
+
+      expect(pull_requests.count).to eq 1
+      expect(WebMock).to have_requested(:post,
+        "https://api.github.com/graphql").once
+    end
+  end
 end
