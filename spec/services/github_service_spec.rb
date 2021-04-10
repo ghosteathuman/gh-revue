@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Github do
+RSpec.describe GithubService do
   describe "identity_request_url" do
     let(:client_id) { Faker::Alphanumeric.alphanumeric(number: 20) }
 
@@ -20,7 +20,7 @@ RSpec.describe Github do
 
       expect(Rails.application.credentials).to receive(:github)
         .and_return(JSON.parse({client_id: client_id}.to_json, object_class: OpenStruct))
-      expect(Github.new.identity_request_url("localhost"))
+      expect(GithubService.new.identity_request_url("localhost"))
         .to eq "https://github.com/login?client_id=#{client_id}&return_to=%2Flogin%2Foauth%2Fauthorize%3"\
           "Fclient_id%3D#{client_id}%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fcallback"\
           "%26scope%3Drepo"
@@ -67,13 +67,39 @@ RSpec.describe Github do
             object_class: OpenStruct)
         )
 
-      Github.new.store_access_token(code)
+      GithubService.new.store_access_token(code)
 
       viewer = Kredis.json login.to_s
 
       expect(viewer.value).to eq({"user" => login, "access_token" => access_token})
       expect(WebMock).to have_requested(:post,
         "https://github.com/login/oauth/access_token").once
+      expect(WebMock).to have_requested(:post,
+        "https://api.github.com/graphql").once
+    end
+  end
+
+  describe "get_pull_requests" do
+    let(:access_token) { Faker::Alphanumeric.alphanumeric(number: 40) }
+    let(:login) { Faker::Internet.username }
+
+    it "gets pull requests" do
+      stub_request(:post, "https://api.github.com/graphql")
+        .with(
+          body: "{\"query\":\"query { viewer { pullRequests(last: 20, states:[MERGED, OPEN]) { edges { node {\\n                number\\n                state\\n                title\\n                url\\n                reviewDecision\\n                reviewRequests(last: 20) { nodes { requestedReviewer { ... on User { login } } } }\\n              } } } } }\"}",
+          headers: {
+            "Authorization" => "bearer #{access_token}",
+            "Content-Type" => "application/json"
+          }
+        )
+        .to_return(status: 200, body: "{\"data\":{\"viewer\":{\"pullRequests\":{\"edges\":[{\"node\":{\"number\":\"3\",\"title\":\"Example\",\"url\":\"https://github.com/example\"}}]}}}}", headers: {})
+
+      user = Kredis.json login.to_s
+      user.value = {"user" => login, "access_token" => access_token}
+
+      pull_requests = GithubService.new.get_pull_requests(login)
+
+      expect(pull_requests.count).to eq 1
       expect(WebMock).to have_requested(:post,
         "https://api.github.com/graphql").once
     end
