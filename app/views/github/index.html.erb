@@ -1,0 +1,5 @@
+<% @pull_requests&.each do |pr| %>
+  <p>
+    <%= link_to(pr["title"], pr["url"]) %>
+  </p>
+<% end %>
