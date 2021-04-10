@@ -1,4 +1,4 @@
-class Github
+class GithubService
   GRAPHQL_URL = URI("https://api.github.com/graphql")
 
   def identity_request_url(request_base_url)

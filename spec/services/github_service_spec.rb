@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Github do
+RSpec.describe GithubService do
   describe "identity_request_url" do
     let(:client_id) { Faker::Alphanumeric.alphanumeric(number: 20) }
 
@@ -20,7 +20,7 @@ RSpec.describe Github do
 
       expect(Rails.application.credentials).to receive(:github)
         .and_return(JSON.parse({client_id: client_id}.to_json, object_class: OpenStruct))
-      expect(Github.new.identity_request_url("localhost"))
+      expect(GithubService.new.identity_request_url("localhost"))
         .to eq "https://github.com/login?client_id=#{client_id}&return_to=%2Flogin%2Foauth%2Fauthorize%3"\
           "Fclient_id%3D#{client_id}%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fcallback"\
           "%26scope%3Drepo"
@@ -67,7 +67,7 @@ RSpec.describe Github do
             object_class: OpenStruct)
         )
 
-      Github.new.store_access_token(code)
+      GithubService.new.store_access_token(code)
 
       viewer = Kredis.json login.to_s
 
@@ -97,7 +97,7 @@ RSpec.describe Github do
       user = Kredis.json login.to_s
       user.value = {"user" => login, "access_token" => access_token}
 
-      pull_requests = Github.new.get_pull_requests(login)
+      pull_requests = GithubService.new.get_pull_requests(login)
 
       expect(pull_requests.count).to eq 1
       expect(WebMock).to have_requested(:post,
