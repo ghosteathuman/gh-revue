@@ -1,0 +1,33 @@
+- pipeline: "CI"
+  on: "EVENT"
+  events:
+    - type: "PUSH"
+      refs:
+        - "refs/heads/gr-4-buddy"
+  priority: "NORMAL"
+  fail_on_prepare_env_warning: true
+  trigger_condition: "ALWAYS"
+  actions:
+    - action: "Rails Test"
+      type: "BUILD"
+      working_directory: "/buddy/gh-revue"
+      docker_image_name: "library/ruby"
+      docker_image_tag: "3.0.1"
+      execute_commands:
+        - "bin/bundle install"
+        - "bin/bundle exec rspec"
+        - "bin/bundle exec brakeman"
+        - "bin/bundle exec standardrb"
+      services:
+      - type: "REDIS"
+        version: "6.2.1"
+        connection:
+          host: "redis"
+          port: 6379
+        pass_variables: true
+      cached_dirs:
+        - "/usr/local/bundle"
+      volume_mappings:
+        - "/:/buddy/gh-revue"
+      trigger_condition: "ALWAYS"
+      shell: "BASH"
