@@ -1,0 +1,28 @@
+version: v1.0
+name: CI
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Test
+    task:
+      env_vars:
+        - name: RAILS_ENV
+          value: test
+        - name: REDIS_PASSWORD
+          value: ""
+      jobs:
+        - name: Test
+          commands:
+            - checkout
+            - sem-service start redis
+            - sem-version ruby 3.0.0
+            - cache restore
+            - bundle config set deployment 'true'
+            - bundle config set path 'vendor/bundle'
+            - bundle install
+            - cache store
+            - bundle exec rspec
+            - bundle exec brakeman
+            - bundle exec standardrb
