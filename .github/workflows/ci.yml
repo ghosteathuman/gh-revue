@@ -44,4 +44,5 @@ jobs:
       run: |
         bundle exec standardrb
     - name: Code Climate Code Coverage
+      if: ${{ github.actor != 'dependabot[bot]' }}
       uses: paambaati/codeclimate-action@v2.7.5
