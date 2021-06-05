@@ -7,7 +7,7 @@ ruby File.read(".ruby-version").strip
 gem "rails", "~> 6.1.0", ">= 6.1.0"
 # Use Puma as the app server
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (https://puma.io)
-gem "puma", "~> 5.0"
+gem "puma", "~> 5.3"
 # Use SCSS for stylesheets
 # Sass adapter for the Rails asset pipeline. (https://github.com/rails/sass-rails)
 gem "sass-rails", ">= 6"
