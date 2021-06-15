@@ -48,9 +48,9 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   # Profiles loading speed for rack applications. (https://miniprofiler.com)
-  gem "rack-mini-profiler", "~> 2.0"
+  gem "rack-mini-profiler", "~> 2.3"
   # Listen to file modifications (https://github.com/guard/listen)
-  gem "listen", "~> 3.3"
+  gem "listen", "~> 3.5"
 end
 
 group :test do
@@ -58,7 +58,7 @@ group :test do
   # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
   gem "simplecov"
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
-  gem "rspec-rails", "~> 4.0.2"
+  gem "rspec-rails", "~> 5.0.1"
   # Library for stubbing HTTP requests in Ruby. (http://github.com/bblimke/webmock)
   gem "webmock"
   # Easily generate fake data (https://github.com/faker-ruby/faker)
