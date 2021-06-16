@@ -20,7 +20,7 @@ RSpec.describe GithubService do
 
       expect(Rails.application.credentials).to receive(:github)
         .and_return(JSON.parse({client_id: client_id}.to_json, object_class: OpenStruct))
-      expect(GithubService.new.identity_request_url("localhost"))
+      expect(GithubService.identity_request_url("localhost"))
         .to eq "https://github.com/login?client_id=#{client_id}&return_to=%2Flogin%2Foauth%2Fauthorize%3"\
           "Fclient_id%3D#{client_id}%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3000%252Fcallback"\
           "%26scope%3Drepo"
@@ -67,7 +67,7 @@ RSpec.describe GithubService do
             object_class: OpenStruct)
         )
 
-      GithubService.new.store_access_token(code)
+      GithubService.store_access_token(code)
 
       viewer = Kredis.json login.to_s
 
@@ -97,7 +97,7 @@ RSpec.describe GithubService do
       user = Kredis.json login.to_s
       user.value = {"user" => login, "access_token" => access_token}
 
-      pull_requests = GithubService.new.get_pull_requests(login)
+      pull_requests = GithubService.get_pull_requests(login)
 
       expect(pull_requests.count).to eq 1
       expect(WebMock).to have_requested(:post,

@@ -1,7 +1,7 @@
 class GithubService
   GRAPHQL_URL = URI("https://api.github.com/graphql")
 
-  def identity_request_url(request_base_url)
+  def self.identity_request_url(request_base_url)
     client_id = Rails.application.credentials.github[:client_id]
 
     return_html = Net::HTTP.get(
@@ -12,7 +12,7 @@ class GithubService
     Nokogiri::HTML.parse(return_html).at_css("a")[:href]
   end
 
-  def store_access_token(code)
+  def self.store_access_token(code)
     url = URI("https://github.com/login/oauth/access_token")
     client_id = Rails.application.credentials.github[:client_id]
     client_secret = Rails.application.credentials.github[:client_secret]
@@ -36,7 +36,7 @@ class GithubService
     user_login
   end
 
-  def get_pull_requests(username)
+  def self.get_pull_requests(username)
     user = Kredis.json username
     access_token = user.value["access_token"]
 
