@@ -48,7 +48,7 @@ group :development do
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   # Profiles loading speed for rack applications. (https://miniprofiler.com)
-  gem "rack-mini-profiler", "~> 2.0"
+  gem "rack-mini-profiler", "~> 2.3"
   # Listen to file modifications (https://github.com/guard/listen)
   gem "listen", "~> 3.5"
 end
