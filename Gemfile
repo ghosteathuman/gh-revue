@@ -58,7 +58,7 @@ group :test do
   # Code coverage for Ruby (https://github.com/simplecov-ruby/simplecov)
   gem "simplecov"
   # RSpec for Rails (https://github.com/rspec/rspec-rails)
-  gem "rspec-rails", "~> 4.0.2"
+  gem "rspec-rails", "~> 5.0.1"
   # Library for stubbing HTTP requests in Ruby. (http://github.com/bblimke/webmock)
   gem "webmock"
   # Easily generate fake data (https://github.com/faker-ruby/faker)
