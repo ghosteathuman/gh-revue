@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 # Full-stack web application framework. (https://rubyonrails.org)
-gem "rails", "~> 6.1.0", ">= 6.1.0"
+gem "rails", "~> 6.1.4"
 # Use Puma as the app server
 # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack applications (https://puma.io)
 gem "puma", "~> 5.3"
