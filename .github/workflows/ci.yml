@@ -45,10 +45,14 @@ jobs:
         bundle exec standardrb
     - name: Jira Webhook
       env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
+        # GITHUB_CONTEXT: ${{ toJson(github) }}
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_EVENT: ${{ toJson(github.event) }}
+        GITHUB_REF: ${{ github.ref }}
         JOB_STATUS: ${{ job.status }}
       run: |
-        echo "$GITHUB_CONTEXT"
+        echo "$GITHUB_EVENT_NAME"
+        echo "$GITHUB_REF"
         echo "$GITHUB_RUN_ID"
         echo "$JOB_STATUS"
     - name: Code Climate Code Coverage
