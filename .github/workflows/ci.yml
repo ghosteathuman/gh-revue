@@ -44,7 +44,17 @@ jobs:
       run: |
         bundle exec standardrb
     - name: Dump GitHub context
-      run: echo ${{ toJson(github) }}
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+    - name: Dump GitHub Run ID
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github.run_id) }}
+      run: echo "$GITHUB_CONTEXT"
     - name: Code Climate Code Coverage
       if: ${{ github.actor != 'dependabot[bot]' }}
       uses: paambaati/codeclimate-action@v2.7.5
