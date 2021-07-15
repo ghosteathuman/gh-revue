@@ -43,12 +43,14 @@ jobs:
     - name: Standard
       run: |
         bundle exec standardrb
-    # - name: Dump GitHub context
-    #   env:
-    #     GITHUB_CONTEXT: ${{ toJson(github) }}
-    #   run: echo "$GITHUB_CONTEXT"
-    - name: Dump GitHub Event
-      run: echo "$GITHUB_EVENT"
+    - name: Jira Webhook
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        JOB_STATUS: ${{ job.status }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+        echo "$GITHUB_RUN_ID"
+        echo "$JOB_STATUS"
     - name: Code Climate Code Coverage
       if: ${{ github.actor != 'dependabot[bot]' }}
       uses: paambaati/codeclimate-action@v2.7.5
