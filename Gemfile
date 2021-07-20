@@ -36,7 +36,7 @@ group :development, :test do
   # Ruby fast debugger - base + CLI (https://github.com/deivid-rodriguez/byebug)
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # Security vulnerability scanner for Ruby on Rails. (https://brakemanscanner.org)
-  gem "brakeman", "~> 5.0"
+  gem "brakeman", "~> 5.1"
   # Ruby Style Guide, with linter &amp; automatic code fixer (https://github.com/testdouble/standard)
   gem "standard", github: "testdouble/standard", branch: "master"
 end
