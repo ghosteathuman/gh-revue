@@ -50,7 +50,7 @@ group :development do
   # Profiles loading speed for rack applications. (https://miniprofiler.com)
   gem "rack-mini-profiler", "~> 2.3"
   # Listen to file modifications (https://github.com/guard/listen)
-  gem "listen", "~> 3.5"
+  gem "listen", "~> 3.6"
 end
 
 group :test do
